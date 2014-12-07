@@ -4,15 +4,15 @@
 
 namespace Network
 {
-    class Proxy
-    {
-        public:
-            Proxy(Stream& one, Stream& two);
-            void Run();
-            void Stop();
-            virtual ~Proxy();
-        private:
-            Stream * sone;
-            Stream * stwo;
-    };
+	class Proxy
+	{
+		public:
+			Proxy(Stream& one, Stream& two);
+			void Run();
+			void Stop();
+			virtual ~Proxy();
+		private:
+			Stream * sone;
+			Stream * stwo;
+	};
 } // Network

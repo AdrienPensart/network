@@ -6,7 +6,7 @@ namespace Network
 {
 	Timeout::Timeout(const long& sec, const long& usec)
 	{
-	    time.tv_sec = sec;
+		time.tv_sec = sec;
 		time.tv_usec = usec;
 	}
 

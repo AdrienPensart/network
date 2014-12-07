@@ -25,13 +25,13 @@ namespace Network
 		Host ip = inet_ntoa(**a);
 		return ip;
 	}
-		
+
 	Host HostInfo::getLocalIp()
 	{
 		return getHostByName(getLocalHostname());
 	}
 
-    Host HostInfo::getHostByAddr(const Host& ip)
+	Host HostInfo::getHostByAddr(const Host& ip)
 	{
 		hostent * host = gethostbyaddr(ip.c_str(), ip.size(), AF_INET);
 		if(!host)
@@ -56,7 +56,7 @@ namespace Network
 				protocole = "udp";
 				break;
 			default:
-			    return s;
+				return s;
 		}
 		servent * serv = getservbyname (name.c_str(), protocole.c_str());
 		if(!serv)
@@ -77,13 +77,13 @@ namespace Network
 		switch(proto)
 		{
 			case TCP:
-			    protocole = "tcp";
+				protocole = "tcp";
 				break;
 			case UDP:
-			    protocole = "udp";
-			    break;
+				protocole = "udp";
+				break;
 			default:
-			    return s;
+				return s;
 		}
 		servent * serv = getservbyport (port, protocole.c_str());
 		if(!serv)

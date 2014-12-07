@@ -25,12 +25,12 @@ namespace Network
 		return getsockopt(sockethandle, level, option_name, option_value, option_len);
 	}
 
-	const Host Socket::getIp(void)
+	Host Socket::getIp()
 	{
 		return inet_ntoa(attachedAddr.sin_addr);
 	}
 
-	const Port Socket::getPort(void)
+	Port Socket::getPort()
 	{
 		return ntohs(attachedAddr.sin_port);
 	}
