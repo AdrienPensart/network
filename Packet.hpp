@@ -3,10 +3,8 @@
 #include "Header.hpp"
 #include <vector>
 
-namespace Network
-{
-	class Packet
-	{
+namespace Network {
+	class Packet {
 		public:
 			virtual void feed(std::vector<char>& buffer);
 			virtual void forge(std::vector<char>& buffer);
@@ -21,8 +19,7 @@ namespace Network
 			std::string data;
 	};
 
-	struct UDPPacket : public Packet
-	{
+	struct UDPPacket : public Packet {
 		UDPPacket();
 		//virtual void forge(std::vector<char>& buffer);
 		virtual size_t getMaxDataLength();
@@ -33,8 +30,7 @@ namespace Network
 		UDPHeader * udp;
 	};
 
-	struct TCPPacket : public Packet
-	{
+	struct TCPPacket : public Packet {
 		TCPPacket();
 
 		virtual size_t getMaxDataLength();
@@ -45,8 +41,7 @@ namespace Network
 		TCPHeader * tcp;
 	};
 
-	struct ICMPPacket : public Packet
-	{
+	struct ICMPPacket : public Packet {
 		ICMPPacket();
 		virtual size_t getMaxDataLength();
 		virtual void setData(const std::string& dataArg);

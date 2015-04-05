@@ -3,21 +3,19 @@
 #include "TcpSocket.hpp"
 #include "Stream.hpp"
 
-namespace Network
-{
+namespace Network {
 	/**
 	 * Représente une connexion renvoyée par un serveur Tcp par Accept(), ou bien
 	 * cette classe peut servir à se connecter vers un serveur grâce à la fonction
 	 * Connect()
 	 */
-	class TcpClient : public Stream, public TcpSocket
-	{
+	class TcpClient : public Stream, public TcpSocket {
 		public:
 			bool connect(const Host& argIp, const Port& argPort);
 
-			#ifdef _WINDOWS_
-				bool connect(const Host& argIp, const Port argPort, Timeout to);
-			#endif
+#ifdef _WINDOWS_
+			bool connect(const Host& argIp, const Port argPort, Timeout to);
+#endif
 
 			void reset();
 			void disconnect();

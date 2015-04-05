@@ -5,13 +5,11 @@
 #include "Exception.hpp"
 #include <string.h>
 */
-namespace Network
-{
+namespace Network {
 	/**
 	 *  Represente le descripteur de fichier d'une socket
 	 */
-	class SocketHandle
-	{
+	class SocketHandle {
 		public:
 			SocketHandle();
 			SocketHandle(const SocketHandle&);
@@ -48,8 +46,7 @@ namespace Network
 			/**
 			 *  Codes d'erreur associés à la valeur du descripteur système
 			 */
-			enum
-			{
+			enum {
 				INVALID_SOCK = INVALID_SOCKET,
 				SOCK_ERROR = SOCKET_ERROR,
 				NOT_ACQUIRED = 0
@@ -60,20 +57,19 @@ namespace Network
 			 */
 			SocketHandleImpl sockethandle;
 
-		#ifdef WIN32
+#ifdef WIN32
 			/**
 			 * Initialise Winsock sur les plateformes Windows
 			 */
-			class WSAInitializer
-			{
+			class WSAInitializer {
 				private:
 					WSADATA m_wsadata;
 				public:
 					WSAInitializer();
 					~WSAInitializer();
 			};
-			private:
-				static WSAInitializer wsai;
-		#endif
+		private:
+			static WSAInitializer wsai;
+#endif
 	};
 } // Network

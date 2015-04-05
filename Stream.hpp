@@ -5,14 +5,12 @@
 #include "Socket.hpp"
 #include "Timeout.hpp"
 
-namespace Network
-{
+namespace Network {
 	/**
 	 * Représente un flux d'octet sur le réseau, le client qui utilise cet objet
 	 * ne sait pas si ce qu'il envoi est envoyé par UDP, TCP ou une autre technique
 	 */
-	class Stream
-	{
+	class Stream {
 		public:
 			Stream();
 			virtual ~Stream();

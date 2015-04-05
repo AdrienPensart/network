@@ -4,10 +4,8 @@
 #include "Socket.hpp"
 #include "Packet.hpp"
 
-namespace Network
-{
-	class RawSocket : public Socket
-	{
+namespace Network {
+	class RawSocket : public Socket {
 		public:
 
 			RawSocket(int protocol);

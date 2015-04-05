@@ -4,89 +4,76 @@
 #include <string>
 using std::string;
 
-namespace Network
-{
-	class Client
-	{
+namespace Network {
+	class Client {
 		protected:
 
 	};
 
-	class Server
-	{
+	class Server {
 		protected:
 
 	};
 
 	template<class Mode>
-	class Tcp
-	{
+	class Tcp {
 		public:
-			Tcp(){}
+			Tcp() {}
 			int send();
 			int recv();
 	};
 
 	template<class Mode>
-	class Udp
-	{
+	class Udp {
 		public:
-			Udp(){}
+			Udp() {}
 			int send();
 			int recv();
 	};
 
-	class NonBlocking
-	{
+	class NonBlocking {
 		public:
 			bool writing_wait();
 			bool reading_wait();
 	};
 
-	class Blocking
-	{
+	class Blocking {
 		public:
 			bool writing_wait();
 			bool reading_wait();
 	};
 
-	class NoCiphering
-	{
+	class NoCiphering {
 		public:
-			void encode(string& str){}
-			void decode(string& str){}
+			void encode(string& str) {}
+			void decode(string& str) {}
 	};
 
-	class XorCiphering
-	{
+	class XorCiphering {
 		public:
 			void encode(string& str);
 			void decode(string& str);
 	};
 
-	class SslCiphering
-	{
+	class SslCiphering {
 		public:
-			void encode(string& str){}
-			void decode(string& str){}
+			void encode(string& str) {}
+			void decode(string& str) {}
 	};
 
 	template <
-				template <class> class  NetworkProtocol,
-				class Mode,
-				class BlockingPolicy=Blocking,
-				class CipheringPolicy=NoCiphering
-			 >
-	class GenericSocket : public NetworkProtocol<Mode>, public BlockingPolicy, public CipheringPolicy
-	{
+	    template <class> class  NetworkProtocol,
+	    class Mode,
+	    class BlockingPolicy=Blocking,
+	    class CipheringPolicy=NoCiphering
+	    >
+	class GenericSocket : public NetworkProtocol<Mode>, public BlockingPolicy, public CipheringPolicy {
 		public:
 
-			GenericSocket()
-			{
+			GenericSocket() {
 			}
 
-			~GenericSocket()
-			{
+			~GenericSocket() {
 			}
 
 		private:

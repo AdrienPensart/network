@@ -1,53 +1,43 @@
 #include "Stream.hpp"
 #include "SelectSet.hpp"
 
-namespace Network
-{
+namespace Network {
 	Stream::Stream()
-	:maxCharacter(DEFAULT_MAX_CHAR)
-	{
+		:maxCharacter(DEFAULT_MAX_CHAR) {
 	}
 
-	Stream::~Stream()
-	{
+	Stream::~Stream() {
 	}
 
-	std::string Stream::recv()
-	{
+	std::string Stream::recv() {
 		std::string buffer;
 		recv(buffer);
 		return buffer;
 	}
 
-	Stream& Stream::operator<<(const std::string& object)
-	{
+	Stream& Stream::operator<<(const std::string& object) {
 		send(object);
 		return *this;
 	}
 
-	Stream& Stream::operator>>(std::string& object)
-	{
+	Stream& Stream::operator>>(std::string& object) {
 		recv(object);
 		return *this;
 	}
 
-	void Stream::setMaxCharacter(const int& max)
-	{
+	void Stream::setMaxCharacter(const int& max) {
 		maxCharacter = max;
 	}
 
-	int Stream::getMaxCharacter()
-	{
+	int Stream::getMaxCharacter() {
 		return maxCharacter;
 	}
 
-	int Stream::send(const std::string& object)
-	{
+	int Stream::send(const std::string& object) {
 		return send(object.c_str(), object.size());
 	}
 
-	int Stream::send(const std::string& object, Timeout to)
-	{
+	int Stream::send(const std::string& object, Timeout to) {
 		return send(object.c_str(), object.size(), to);
 	}
 	/*
@@ -56,64 +46,48 @@ namespace Network
 		return send(&object[0], object.size());
 	};
 	*/
-	int Stream::recv(std::string& object)
-	{
+	int Stream::recv(std::string& object) {
 		char * buffer = new char[DEFAULT_MAX_CHAR];
 		int received_char = 0;
-		try
-		{
+		try {
 			received_char = recv(buffer, DEFAULT_MAX_CHAR);
-			if(received_char >= 0)
-			{
+			if(received_char >= 0) {
 				object.assign(buffer, received_char);
 			}
 			delete buffer;
-		}
-		catch(...)
-		{
+		} catch(...) {
 			delete buffer;
 			throw;
 		}
 		return received_char;
 	}
 
-	int Stream::recv(std::string& object, Timeout to)
-	{
+	int Stream::recv(std::string& object, Timeout to) {
 		int received_char = 0;
 		char * buffer = new char[DEFAULT_MAX_CHAR];
-		try
-		{
+		try {
 			received_char = recv(buffer, DEFAULT_MAX_CHAR, to);
-			if(received_char >= 0)
-			{
+			if(received_char >= 0) {
 				object.assign(buffer,received_char);
 			}
 			delete buffer;
-		}
-		catch(...)
-		{
+		} catch(...) {
 			delete buffer;
 			throw;
 		}
 		return received_char;
 	}
 
-	int Stream::recv(std::string& object, char delimiter, Timeout to, bool include)
-	{
+	int Stream::recv(std::string& object, char delimiter, Timeout to, bool include) {
 		object.clear();
 		char last;
-		for(;;)
-		{
-			if(!recv(&last, 1, to))
-			{
+		for(;;) {
+			if(!recv(&last, 1, to)) {
 				break;
 			}
-			if(last != delimiter)
-			{
+			if(last != delimiter) {
 				object += last;
-			}
-			else
-			{
+			} else {
 				if(include)
 					object+=delimiter;
 				break;
@@ -122,22 +96,16 @@ namespace Network
 		return object.size();
 	}
 
-	int Stream::recv(std::string& object, char delimiter, bool include)
-	{
+	int Stream::recv(std::string& object, char delimiter, bool include) {
 		object.clear();
 		char last;
-		for(;;)
-		{
-			if(!recv(&last, 1))
-			{
+		for(;;) {
+			if(!recv(&last, 1)) {
 				break;
 			}
-			if(last != delimiter)
-			{
+			if(last != delimiter) {
 				object += last;
-			}
-			else
-			{
+			} else {
 				if(include)
 					object+=delimiter;
 				break;

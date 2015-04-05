@@ -3,41 +3,33 @@
 
 #include <cstring>
 
-namespace Network
-{
-	size_t Packet::size()
-	{
+namespace Network {
+	size_t Packet::size() {
 		size_t s = data.size();
 		for(size_t index = 0; index < headers.size(); index++)
 			s += headers[index]->getSize();
 		return s;
 	}
 
-	std::vector<Header *> Packet::getHeaders()
-	{
+	std::vector<Header *> Packet::getHeaders() {
 		return headers;
 	}
 
-	void Packet::addHeader(Header * header)
-	{
+	void Packet::addHeader(Header * header) {
 		headers.push_back(header);
 	}
 
-	const std::string& Packet::getData()
-	{
+	const std::string& Packet::getData() {
 		return data;
 	}
 
-	void Packet::setData(const std::string& dataArg)
-	{
+	void Packet::setData(const std::string& dataArg) {
 		data = dataArg;
 	}
 
-	void Packet::feed(std::vector<char>& buffer)
-	{
+	void Packet::feed(std::vector<char>& buffer) {
 		size_t offset = 0;
-		for(size_t index = 0; index < headers.size(); index++)
-		{
+		for(size_t index = 0; index < headers.size(); index++) {
 			Header * current = headers[index];
 			LOG << "Offset : " + Common::toString(offset) + ", size to feed : " + Common::toString(current->getSize());
 			current->feed(&buffer[0]+offset, current->getSize());
@@ -46,29 +38,26 @@ namespace Network
 		data = std::string(&buffer[0]+offset, buffer.size()-offset);
 	}
 
-	void Packet::forge(std::vector<char>& buffer)
-	{
+	void Packet::forge(std::vector<char>& buffer) {
 		buffer.resize(size());
 		size_t offset = 0;
-		for(size_t index = 0; index < headers.size(); index++)
-		{
+		for(size_t index = 0; index < headers.size(); index++) {
 			Header * current = headers[index];
-			#if WIN32
-				memcpy_s(&buffer[0]+offset, current->getSize(), current->getImpl(), current->getSize());
-			#else
-				memcpy(&buffer[0]+offset, current->getImpl(), current->getSize());
-			#endif
+#if WIN32
+			memcpy_s(&buffer[0]+offset, current->getSize(), current->getImpl(), current->getSize());
+#else
+			memcpy(&buffer[0]+offset, current->getImpl(), current->getSize());
+#endif
 			offset += current->getSize();
 		}
-		#if WIN32
-			memcpy_s(&buffer[0] + offset, getMaxDataLength(), getData().c_str(), getData().size());
-		#else
-			memcpy(&buffer[0] + offset, getData().c_str(), getData().size());
-		#endif
+#if WIN32
+		memcpy_s(&buffer[0] + offset, getMaxDataLength(), getData().c_str(), getData().size());
+#else
+		memcpy(&buffer[0] + offset, getData().c_str(), getData().size());
+#endif
 	}
 
-	UDPPacket::UDPPacket()
-	{
+	UDPPacket::UDPPacket() {
 		ip = new IPHeader;
 		udp = new UDPHeader(*ip, getData());
 		ip->header.protocol = IPPROTO_UDP;
@@ -77,8 +66,7 @@ namespace Network
 		addHeader(udp);
 	}
 
-	void UDPPacket::setData(const std::string& dataArg)
-	{
+	void UDPPacket::setData(const std::string& dataArg) {
 		Packet::setData(dataArg);
 
 		ip->header.tlength = size();
@@ -89,13 +77,11 @@ namespace Network
 		LOG << "UDP Checksum : " + Common::toString(udp->header.checksum);
 	}
 
-	size_t UDPPacket::getMaxDataLength()
-	{
+	size_t UDPPacket::getMaxDataLength() {
 		return MAX_UDP_PACKET_LENGTH - (ip->getSize() + udp->getSize());
 	}
 
-	ICMPPacket::ICMPPacket()
-	{
+	ICMPPacket::ICMPPacket() {
 		ip = new IPHeader;
 		icmp = new ICMPHeader(getData());
 		ip->header.protocol = IPPROTO_ICMP;
@@ -104,13 +90,11 @@ namespace Network
 		addHeader(icmp);
 	}
 
-	size_t ICMPPacket::getMaxDataLength()
-	{
+	size_t ICMPPacket::getMaxDataLength() {
 		return MAX_ICMP_PACKET_LENGTH - (ip->getSize() + icmp->getSize());
 	}
 
-	void ICMPPacket::setData(const std::string& dataArg)
-	{
+	void ICMPPacket::setData(const std::string& dataArg) {
 		Packet::setData(dataArg);
 
 		ip->header.tlength = size();
@@ -118,8 +102,7 @@ namespace Network
 		icmp->computeChecksum();
 	}
 
-	TCPPacket::TCPPacket()
-	{
+	TCPPacket::TCPPacket() {
 		ip = new IPHeader;
 		tcp = new TCPHeader(*ip, getData());
 
@@ -139,13 +122,11 @@ namespace Network
 		addHeader(tcp);
 	}
 
-	size_t TCPPacket::getMaxDataLength()
-	{
+	size_t TCPPacket::getMaxDataLength() {
 		return MAX_TCP_PACKET_LENGTH - (ip->getSize() + tcp->getSize());
 	}
 
-	void TCPPacket::setData(const std::string& dataArg)
-	{
+	void TCPPacket::setData(const std::string& dataArg) {
 		Packet::setData(dataArg);
 
 		ip->header.tlength = size();

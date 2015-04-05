@@ -3,10 +3,8 @@
 #include "Types.hpp"
 #include <common/Exception.hpp>
 
-namespace Network
-{
-	class SocketException : public Common::Exception
-	{
+namespace Network {
+	class SocketException : public Common::Exception {
 		public:
 
 			SocketException(const std::string& msgArg, SocketHandleImpl sock=0, int errorCode=0);
@@ -21,13 +19,13 @@ namespace Network
 			SocketHandleImpl socketValue;
 	};
 
-	#ifdef WIN32
-		/**
-		 *  Exception lancée si l'initialisation de Winsock sur les plateformes
-		 *  Windows échoue
-		 */
-		typedef SocketException WinsockInitExcept;
-	#endif
+#ifdef WIN32
+	/**
+	 *  Exception lancée si l'initialisation de Winsock sur les plateformes
+	 *  Windows échoue
+	 */
+	typedef SocketException WinsockInitExcept;
+#endif
 
 	typedef SocketException InvalidBlocking;
 	typedef SocketException Deconnection;

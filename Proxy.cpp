@@ -1,22 +1,17 @@
 #include "Proxy.hpp"
 
-namespace Network
-{
+namespace Network {
 	Proxy::Proxy(Stream& one, Stream& two)
-	:sone(&one),
-	 stwo(&two)
-	{
+		:sone(&one),
+		 stwo(&two) {
 	}
 
-	Proxy::~Proxy()
-	{
+	Proxy::~Proxy() {
 	}
 
-	void Proxy::Run()
-	{
+	void Proxy::Run() {
 	}
 
-	void Proxy::Stop()
-	{
+	void Proxy::Stop() {
 	}
 }

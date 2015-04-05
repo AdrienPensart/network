@@ -2,10 +2,8 @@
 
 #include "Stream.hpp"
 
-namespace Network
-{
-	class Proxy
-	{
+namespace Network {
+	class Proxy {
 		public:
 			Proxy(Stream& one, Stream& two);
 			void Run();

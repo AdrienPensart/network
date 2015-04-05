@@ -6,5 +6,5 @@
 
 // Compatibilité avec le compilateur de Microsoft
 #ifdef _MSC_VER
-	#pragma comment(lib,"WS2_32.LIB")
+#pragma comment(lib,"WS2_32.LIB")
 #endif

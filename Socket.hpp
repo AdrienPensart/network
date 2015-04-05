@@ -3,19 +3,16 @@
 #include "SocketHandle.hpp"
 #include "SocketException.hpp"
 
-namespace Network
-{
+namespace Network {
 	/**
 	 * Repr?ente un socket basique, sans protocole particulier associ? cette
 	 * classe sert de base ?TcpSocket, UdpSocket et RawSocket
 	 */
-	class Socket : public SocketHandle
-	{
+	class Socket : public SocketHandle {
 		protected:
 
 			// de quelle facon ferme-t-on la connexion ?
-			enum
-			{
+			enum {
 				RECEIVING = 0,
 				SENDING = 1,
 				SENDRECV = 2
@@ -122,24 +119,21 @@ namespace Network
 			/**
 			 * Met le socket en mode synchrone (bloquant)
 			 */
-			int block(void)
-			{
+			int block(void) {
 				return setBlocking(true);
 			}
 
 			/**
 			 * Met le socket en mode asynchrone (non-bloquant)
 			 */
-			int unblock(void)
-			{
+			int unblock(void) {
 				return setBlocking(false);
 			}
 
 			/**
 			 * Renvoi le statut du socket, soit bloquant, soit non-bloquant
 			 */
-			bool blocked(void) const
-			{
+			bool blocked(void) const {
 				return blocking_status;
 			}
 	};

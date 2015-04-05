@@ -2,13 +2,11 @@
 
 #include "Types.hpp"
 
-namespace Network
-{
+namespace Network {
 	/**
 	 * Informations sur un hôte comme le nom de la machine locale, etc.
 	 */
-	class HostInfo
-	{
+	class HostInfo {
 		public:
 
 			/**
@@ -39,14 +37,12 @@ namespace Network
 	/**
 	 * Donne des informations sur les services que proposent une machine
 	 */
-	class ServiceInfo
-	{
+	class ServiceInfo {
 		public:
 			/**
 			 * Représente un service sur une machine
 			 */
-			typedef struct
-			{
+			typedef struct {
 				Host name;
 				Port port;
 				int proto;

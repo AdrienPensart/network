@@ -2,16 +2,14 @@
 
 #include "Types.hpp"
 
-namespace Network
-{
+namespace Network {
 	/**
 	 * Représente un timeout, soit d'une durée déterminée (limite finie)
 	 * ou bien indéterminée (attendre indéfiniment).
 	 * Cette classe pourra servir à spécifier des timeouts lors
 	 * des envois / réceptions.
 	 */
-	class Timeout
-	{
+	class Timeout {
 		public:
 			/**
 			 * Constructeur, par défaut, le timeout est toujours nul, c'est à dire un appel non bloquant.

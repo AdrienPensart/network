@@ -3,8 +3,7 @@
 #include <string>
 #include <common/WindowsWrapper.hpp>
 
-namespace Network
-{
+namespace Network {
 #ifdef WIN32
 	// on simplifies quelques incompatibilites
 	typedef int socklen_t;

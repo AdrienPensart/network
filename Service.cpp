@@ -1,23 +1,18 @@
 #include "Service.hpp"
 #include "SocketException.hpp"
 
-namespace Network
-{
-	Host HostInfo::getLocalHostname()
-	{
+namespace Network {
+	Host HostInfo::getLocalHostname() {
 		char hostname[SIZEOFHOSTNAME];
-		if(gethostname(hostname,SIZEOFHOSTNAME) == SOCKET_ERROR)
-		{
+		if(gethostname(hostname,SIZEOFHOSTNAME) == SOCKET_ERROR) {
 			throw SocketException("gethostname failed");
 		}
 		return hostname;
 	}
 
-	Host HostInfo::getHostByName(const Host& name)
-	{
+	Host HostInfo::getHostByName(const Host& name) {
 		hostent * host = gethostbyname(name.c_str());
-		if(!host)
-		{
+		if(!host) {
 			throw SocketException("gethostbyname failed");
 		}
 
@@ -26,16 +21,13 @@ namespace Network
 		return ip;
 	}
 
-	Host HostInfo::getLocalIp()
-	{
+	Host HostInfo::getLocalIp() {
 		return getHostByName(getLocalHostname());
 	}
 
-	Host HostInfo::getHostByAddr(const Host& ip)
-	{
+	Host HostInfo::getHostByAddr(const Host& ip) {
 		hostent * host = gethostbyaddr(ip.c_str(), ip.size(), AF_INET);
-		if(!host)
-		{
+		if(!host) {
 			throw SocketException("gethostbyaddr failed");
 		}
 
@@ -43,24 +35,21 @@ namespace Network
 		return name;
 	}
 
-	ServiceInfo::Service ServiceInfo::getServByName(const Host& name, PROTO proto)
-	{
+	ServiceInfo::Service ServiceInfo::getServByName(const Host& name, PROTO proto) {
 		Service s;
 		Host protocole;
-		switch(proto)
-		{
-			case TCP:
-				protocole = "tcp";
-				break;
-			case UDP:
-				protocole = "udp";
-				break;
-			default:
-				return s;
+		switch(proto) {
+		case TCP:
+			protocole = "tcp";
+			break;
+		case UDP:
+			protocole = "udp";
+			break;
+		default:
+			return s;
 		}
 		servent * serv = getservbyname (name.c_str(), protocole.c_str());
-		if(!serv)
-		{
+		if(!serv) {
 			throw SocketException("getservbyname failed");
 		}
 
@@ -70,24 +59,21 @@ namespace Network
 		return s;
 	}
 
-	ServiceInfo::Service ServiceInfo::getServByPort(const Port& port, PROTO proto)
-	{
+	ServiceInfo::Service ServiceInfo::getServByPort(const Port& port, PROTO proto) {
 		Service s;
 		Host protocole;
-		switch(proto)
-		{
-			case TCP:
-				protocole = "tcp";
-				break;
-			case UDP:
-				protocole = "udp";
-				break;
-			default:
-				return s;
+		switch(proto) {
+		case TCP:
+			protocole = "tcp";
+			break;
+		case UDP:
+			protocole = "udp";
+			break;
+		default:
+			return s;
 		}
 		servent * serv = getservbyport (port, protocole.c_str());
-		if(!serv)
-		{
+		if(!serv) {
 			throw SocketException("getservbyport failed");
 		}
 

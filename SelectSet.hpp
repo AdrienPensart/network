@@ -5,15 +5,13 @@
 
 #include <vector>
 
-namespace Network
-{
+namespace Network {
 	typedef std::vector<Socket*> SocketSet;
 
 	/**
 	 * Gestion d'un ensemble de sockets pour la détection d'événement asynchrone
 	 */
-	class SelectSet
-	{
+	class SelectSet {
 		private:
 
 			enum SelectType { READFS, WRITEFS, EXCEPTFS };

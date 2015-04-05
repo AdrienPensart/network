@@ -9,12 +9,10 @@
 
 #include <string>
 
-namespace Network
-{
+namespace Network {
 	typedef Common::Exception PipeException;
 
-	class Pipe : public Stream
-	{
+	class Pipe : public Stream {
 		public:
 
 			Pipe();

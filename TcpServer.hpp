@@ -3,13 +3,11 @@
 #include "TcpSocket.hpp"
 #include "TcpClient.hpp"
 
-namespace Network
-{
+namespace Network {
 	/**
 	 * Représente un serveur Tcp
 	 */
-	class TcpServer : public TcpSocket
-	{
+	class TcpServer : public TcpSocket {
 		public:
 
 			TcpServer();

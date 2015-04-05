@@ -5,14 +5,12 @@
 
 #include <string>
 
-namespace Network
-{
+namespace Network {
 	/**
 	 * Cette classe permet de représenter un socket permettant
 	 * d'utiliser le protocole UDP sur le réseau
 	 */
-	class UdpSocket : public Stream, public Socket
-	{
+	class UdpSocket : public Stream, public Socket {
 		public:
 			UdpSocket(const Port& argPort);
 			UdpSocket();
