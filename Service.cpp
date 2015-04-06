@@ -39,14 +39,14 @@ namespace Network {
 		Service s;
 		Host protocole;
 		switch(proto) {
-		case TCP:
-			protocole = "tcp";
-			break;
-		case UDP:
-			protocole = "udp";
-			break;
-		default:
-			return s;
+			case TCP:
+				protocole = "tcp";
+				break;
+			case UDP:
+				protocole = "udp";
+				break;
+			default:
+				return s;
 		}
 		servent * serv = getservbyname (name.c_str(), protocole.c_str());
 		if(!serv) {
@@ -63,14 +63,14 @@ namespace Network {
 		Service s;
 		Host protocole;
 		switch(proto) {
-		case TCP:
-			protocole = "tcp";
-			break;
-		case UDP:
-			protocole = "udp";
-			break;
-		default:
-			return s;
+			case TCP:
+				protocole = "tcp";
+				break;
+			case UDP:
+				protocole = "udp";
+				break;
+			default:
+				return s;
 		}
 		servent * serv = getservbyport (port, protocole.c_str());
 		if(!serv) {

@@ -32,15 +32,15 @@ namespace Network {
 		int retval = 0;
 
 		switch(type) {
-		case READFS:
-			retval = select(socket.getDescriptor()+1, &fs, 0, 0, &to.c_struct());
-			break;
-		case WRITEFS:
-			retval = select(socket.getDescriptor()+1, 0, &fs, 0, &to.c_struct());
-			break;
-		case EXCEPTFS:
-			retval = select(socket.getDescriptor()+1, 0, 0, &fs, &to.c_struct());
-			break;
+			case READFS:
+				retval = select(socket.getDescriptor()+1, &fs, 0, 0, &to.c_struct());
+				break;
+			case WRITEFS:
+				retval = select(socket.getDescriptor()+1, 0, &fs, 0, &to.c_struct());
+				break;
+			case EXCEPTFS:
+				retval = select(socket.getDescriptor()+1, 0, 0, &fs, &to.c_struct());
+				break;
 		}
 		// erreur
 		if (retval == SOCKET_ERROR) {
@@ -67,15 +67,15 @@ namespace Network {
 
 		int retval = 0;
 		switch(type) {
-		case READFS:
-			retval = select(maxSocket+1, &fs, 0, 0, &to.c_struct());
-			break;
-		case WRITEFS:
-			retval = select(maxSocket+1, 0, &fs, 0, &to.c_struct());
-			break;
-		case EXCEPTFS:
-			retval = select(maxSocket+1, 0, 0, &fs, &to.c_struct());
-			break;
+			case READFS:
+				retval = select(maxSocket+1, &fs, 0, 0, &to.c_struct());
+				break;
+			case WRITEFS:
+				retval = select(maxSocket+1, 0, &fs, 0, &to.c_struct());
+				break;
+			case EXCEPTFS:
+				retval = select(maxSocket+1, 0, 0, &fs, &to.c_struct());
+				break;
 		}
 
 		if (retval == SOCKET_ERROR) {
